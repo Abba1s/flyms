@@ -47,9 +47,9 @@ jobs:
           export FLYMS_API_URL=http://127.0.0.1:54321
           export FLYMS_ANON_KEY=$(supabase status -o json | jq -r .ANON_KEY)
           pnpm --filter @flyms/shared test
-      - name: Serve Edge Functions (Cloudflare Turnstile test keys)
+      - name: Serve Edge Functions (Cloudflare Turnstile test keys, mock SOP drafts)
         run: |
-          printf 'TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA\nRATE_LIMIT_SECRET=ci\nALLOWED_ORIGINS=http://localhost:5173\n' > supabase/functions/.env
+          printf 'TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA\nRATE_LIMIT_SECRET=ci\nALLOWED_ORIGINS=http://localhost:5173\nSOP_MOCK=1\nLINK_CHECK_SECRET=ci\n' > supabase/functions/.env
           supabase functions serve --env-file supabase/functions/.env &
       - name: E2E (desktop + mobile)
         run: |
