@@ -74,7 +74,7 @@ export function AdminLayout() {
       <aside className="flex flex-col gap-4 border-b border-border bg-surface p-3 md:sticky md:top-0 md:h-dvh md:w-56 md:border-b-0 md:border-r md:p-4">
         <div className="flex items-center justify-between">
           <Link to="/admin" className="font-display font-bold">
-            FlyMS Admin
+            Admin
           </Link>
           <Link to="/" className="text-xs text-muted hover:underline md:hidden">
             View site

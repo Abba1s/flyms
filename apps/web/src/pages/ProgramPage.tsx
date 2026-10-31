@@ -53,10 +53,10 @@ export function ProgramPage() {
   useEffect(() => {
     if (p) {
       trackProgramView(p.id);
-      document.title = `${p.name} · ${p.university_name} — FlyMS`;
+      document.title = `${p.name} · ${p.university_name} — Universal Travel and Education Consultancy`;
     }
     return () => {
-      document.title = 'FlyMS';
+      document.title = 'Universal Travel and Education Consultancy';
     };
   }, [p]);
 

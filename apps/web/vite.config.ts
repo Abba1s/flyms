@@ -20,8 +20,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'FlyMS — Master’s in Germany',
-        short_name: 'FlyMS',
+        name: 'Universal Travel and Education Consultancy',
+        short_name: 'UTEC',
         description:
           'Find master’s programs in Germany in any field, see where admissions are open now, and draft your Statement of Purpose.',
         theme_color: '#4338CA',

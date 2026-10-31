@@ -106,7 +106,7 @@ function jsonLd(p, url) {
 
 function pageFor(template, p) {
   const url = `${SITE}/programs/${p.slug}`;
-  const title = `${p.name} · ${p.university_name} — FlyMS`;
+  const title = `${p.name} · ${p.university_name} — Universal Travel and Education Consultancy`;
   const description = describe(p).slice(0, 300);
   const head = [
     `<title>${esc(title)}</title>`,

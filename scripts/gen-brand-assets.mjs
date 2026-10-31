@@ -25,7 +25,7 @@ const og = `<html><head><style>
     background:rgba(21,128,61,.12);padding:12px 24px;border-radius:999px;align-self:flex-start}
   .dot{width:16px;height:16px;border-radius:50%;background:#15803D}
 </style></head><body><div class="wrap">
-  <div class="brand"><img src="${logoData}" width="72" height="72"/>FlyMS</div>
+  <div class="brand"><img src="${logoData}" width="72" height="72"/>Universal Travel and Education Consultancy</div>
   <h1>Master’s programs in Germany — see where admissions are <span>open today</span>.</h1>
   <div class="pill"><span class="dot"></span>Every field · Map · Deadlines · SOP writer</div>
 </div></body></html>`;

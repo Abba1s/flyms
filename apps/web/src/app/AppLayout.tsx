@@ -49,11 +49,14 @@ const secondaryNav: NavItem[] = [
 
 function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
-      <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-contrast">
+    <Link
+      to="/"
+      className="flex items-center gap-2 font-display text-sm font-bold leading-tight tracking-tight"
+    >
+      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-primary text-primary-contrast">
         <PlaneIcon className="h-[18px] w-[18px]" />
       </span>
-      FlyMS
+      <span className="max-w-[11rem]">Universal Travel and Education Consultancy</span>
     </Link>
   );
 }

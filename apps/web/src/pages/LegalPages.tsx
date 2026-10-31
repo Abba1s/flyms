@@ -22,8 +22,8 @@ export function PrivacyPage() {
     <Doc title="Privacy">
       <p className="text-sm text-muted">Last updated {OPERATOR.updated}</p>
       <p>
-        FlyMS is built to work without accounts and to keep as little personal data as possible.
-        This page explains exactly what is processed and why.
+        Universal Travel and Education Consultancy is built to work without accounts and to keep as
+        little personal data as possible. This page explains exactly what is processed and why.
       </p>
 
       <h2>Data that stays on your device</h2>
@@ -89,8 +89,8 @@ export function PrivacyPage() {
 
       <h2>Cookies</h2>
       <p>
-        FlyMS itself sets no tracking cookies. Cloudflare Turnstile may set a strictly necessary
-        cookie while you submit a form.
+        Universal Travel and Education Consultancy itself sets no tracking cookies. Cloudflare
+        Turnstile may set a strictly necessary cookie while you submit a form.
       </p>
 
       <h2>Your rights</h2>
@@ -106,11 +106,11 @@ export function PrivacyPage() {
 
 export function AboutPage() {
   return (
-    <Doc title="About FlyMS">
+    <Doc title="About Universal Travel and Education Consultancy">
       <p>
-        FlyMS helps international students find master’s programs in Germany in any field, see on a
-        map where admissions are open right now, keep track of applications and draft a Statement of
-        Purpose.
+        Universal Travel and Education Consultancy helps international students find master’s
+        programs in Germany in any field, see on a map where admissions are open right now, keep
+        track of applications and draft a Statement of Purpose.
       </p>
       <h2>Where the data comes from</h2>
       <p>
@@ -125,8 +125,8 @@ export function AboutPage() {
       </p>
       <h2>Independent</h2>
       <p>
-        FlyMS is not affiliated with any university, uni-assist, DAAD or the German government. It
-        is free and has no paid placements.
+        Universal Travel and Education Consultancy is not affiliated with any university,
+        uni-assist, DAAD or the German government. It is free and has no paid placements.
       </p>
       <h2>The SOP writer</h2>
       <p>

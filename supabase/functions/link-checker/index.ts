@@ -14,7 +14,7 @@ const admin = createClient(
 const TIMEOUT_MS = 12_000;
 const CONCURRENCY = 6;
 const MAX_URLS = 800;
-const USER_AGENT = 'FlyMS-LinkChecker/1.0 (checks that program links still work)';
+const USER_AGENT = 'UTEC-LinkChecker/1.0 (checks that program links still work)';
 
 async function authorize(req: Request) {
   const secret = Deno.env.get('LINK_CHECK_SECRET');

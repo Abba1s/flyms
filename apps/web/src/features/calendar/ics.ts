@@ -94,10 +94,10 @@ export function buildIcs(events: CalendarEvent[], origin: string, now = new Date
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//FlyMS//Application deadlines//EN',
+    'PRODID:-//UTEC//Application deadlines//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
-    'X-WR-CALNAME:FlyMS deadlines',
+    'X-WR-CALNAME:Master’s application deadlines',
   ];
   for (const e of events) {
     lines.push(

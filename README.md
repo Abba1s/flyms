@@ -1,4 +1,4 @@
-# FlyMS
+# Universal Travel and Education Consultancy
 
 Find master's programs in Germany in any field, see on a map where admissions are open right now, track applications, and draft an English Statement of Purpose.
 

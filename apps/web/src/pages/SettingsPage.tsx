@@ -47,7 +47,7 @@ export function SettingsPage() {
       const parsed = backupSchema.parse(JSON.parse(await file.text()));
       setPending({ data: parsed.data, drafts: validDrafts(parsed.sopDrafts) });
     } catch {
-      toast('That file is not a FlyMS backup.');
+      toast('That file is not a Universal Travel and Education Consultancy backup.');
     } finally {
       if (fileRef.current) fileRef.current.value = '';
     }
@@ -79,8 +79,8 @@ export function SettingsPage() {
         <h2 className="text-lg font-semibold">Install app</h2>
         <p className="text-sm text-muted">
           {installed
-            ? 'FlyMS is installed on this device.'
-            : 'Add FlyMS to your home screen. My List, the tracker and SOP drafts then work offline.'}
+            ? 'Universal Travel and Education Consultancy is installed on this device.'
+            : 'Add Universal Travel and Education Consultancy to your home screen. My List, the tracker and SOP drafts then work offline.'}
         </p>
         {!installed &&
           (canInstall ? (
@@ -92,7 +92,7 @@ export function SettingsPage() {
                 })
               }
             >
-              Install FlyMS
+              Install Universal Travel and Education Consultancy
             </Button>
           ) : (
             <p className="text-sm text-muted">
@@ -105,8 +105,9 @@ export function SettingsPage() {
       <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-5">
         <h2 className="text-lg font-semibold">Backup</h2>
         <p className="text-sm text-muted">
-          FlyMS has no accounts. Your saved programs, application tracker and SOP drafts live only
-          in this browser. Export a backup file to keep them safe or move them to another device.
+          Universal Travel and Education Consultancy has no accounts. Your saved programs,
+          application tracker and SOP drafts live only in this browser. Export a backup file to keep
+          them safe or move them to another device.
         </p>
         {!storageAvailable && (
           <p role="alert" className="text-sm text-danger">

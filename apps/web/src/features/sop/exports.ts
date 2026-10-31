@@ -40,7 +40,7 @@ export async function downloadDocx(draft: SopDraft): Promise<void> {
       }),
   );
   const doc = new Document({
-    creator: 'FlyMS',
+    creator: 'Universal Travel and Education Consultancy',
     title: 'Statement of Purpose',
     sections: [
       {

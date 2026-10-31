@@ -1,6 +1,6 @@
 const FAQ: { q: string; a: string }[] = [
   {
-    q: 'What does FlyMS cover?',
+    q: 'What does Universal Travel and Education Consultancy cover?',
     a: "Master's programs at German universities in every field. Each program shows its application windows, key requirements and costs, with a link to the official page.",
   },
   {

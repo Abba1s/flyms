@@ -37,7 +37,7 @@ test('privacy, about and SEO files are served', async ({ page, request }) => {
   await expect(page.getByRole('heading', { name: 'Privacy' })).toBeVisible();
   await expect(page.getByText(/one-way hash of your IP address/)).toBeVisible();
   await page.goto('/about');
-  await expect(page.getByRole('heading', { name: 'About FlyMS' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'About Universal Travel and Education Consultancy' })).toBeVisible();
   const manifest = await request.get('/manifest.webmanifest');
   // The dev server does not emit the manifest; production builds do (checked in the build step).
   expect([200, 404]).toContain(manifest.status());
