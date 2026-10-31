@@ -1,0 +1,16 @@
+node_modules
+**/node_modules
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.local
+supabase/functions/.env
+supabase/.temp
+supabase/.branches
+data/reference
+scripts/decode_reference_data.py
+apps/web/dist
+test-results
+playwright-report
+.vercel
