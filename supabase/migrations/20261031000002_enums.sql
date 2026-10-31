@@ -1,0 +1,11 @@
+create type public.degree_type as enum ('MSc','MA','MEng','MBA','LLM','MEd','MFA','MPH','MRes','Other');
+create type public.teaching_language as enum ('english','german','english_german');
+create type public.intake_season as enum ('winter','summer');
+create type public.application_portal as enum ('uni_assist','direct','hochschulstart','other');
+create type public.university_type as enum ('university','university_applied_sciences','technical_university','art_music','other');
+create type public.publish_state as enum ('draft','published');
+create type public.moderation_status as enum ('pending','approved','rejected');
+create type public.change_request_type as enum ('new_program','update_program');
+create type public.report_kind as enum ('deadline','link','requirement','fee','other');
+create type public.import_row_action as enum ('new','update','unchanged','error');
+create type public.sop_template as enum ('engineering_science','computer_science','business','arts_design','law','social_humanities','medicine_health','education');

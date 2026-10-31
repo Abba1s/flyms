@@ -1,0 +1,108 @@
+[
+  {
+    "name": "open mid-window",
+    "today": "2026-11-01",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "open"
+  },
+  {
+    "name": "opens today",
+    "today": "2026-10-01",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "open"
+  },
+  {
+    "name": "closes today",
+    "today": "2027-01-15",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "closing_soon"
+  },
+  {
+    "name": "closed day after deadline",
+    "today": "2027-01-16",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "closed"
+  },
+  {
+    "name": "exactly 14 days left",
+    "today": "2027-01-01",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "closing_soon"
+  },
+  {
+    "name": "15 days left",
+    "today": "2026-12-31",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "open"
+  },
+  {
+    "name": "opens tomorrow",
+    "today": "2026-09-30",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "opening_soon"
+  },
+  {
+    "name": "opens in exactly 60 days",
+    "today": "2026-08-02",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "opening_soon"
+  },
+  {
+    "name": "opens in 61 days",
+    "today": "2026-08-01",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
+    "status": "closed"
+  },
+  {
+    "name": "no start date, before deadline",
+    "today": "2026-11-01",
+    "start": null,
+    "end": "2027-01-15",
+    "status": "open"
+  },
+  {
+    "name": "no start date, after deadline",
+    "today": "2027-02-01",
+    "start": null,
+    "end": "2027-01-15",
+    "status": "closed"
+  },
+  {
+    "name": "no end date",
+    "today": "2026-11-01",
+    "start": "2026-10-01",
+    "end": null,
+    "status": "unknown"
+  },
+  { "name": "no dates", "today": "2026-11-01", "start": null, "end": null, "status": "unknown" },
+  {
+    "name": "leap day deadline open",
+    "today": "2028-02-29",
+    "start": "2027-12-01",
+    "end": "2028-02-29",
+    "status": "closing_soon"
+  },
+  {
+    "name": "across DST change",
+    "today": "2027-03-27",
+    "start": "2027-03-01",
+    "end": "2027-03-29",
+    "status": "closing_soon"
+  },
+  {
+    "name": "single-day window",
+    "today": "2027-05-05",
+    "start": "2027-05-05",
+    "end": "2027-05-05",
+    "status": "closing_soon"
+  }
+]

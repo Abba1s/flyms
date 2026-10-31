@@ -1,0 +1,105 @@
+field_slug,slug,name,sort_order
+computer-science,general-computer-science,General Computer Science,1
+computer-science,artificial-intelligence,Artificial Intelligence,2
+computer-science,machine-learning,Machine Learning,3
+computer-science,data-science,Data Science & Analytics,4
+computer-science,computer-vision,Computer Vision & Visual Computing,5
+computer-science,natural-language-processing,Natural Language Processing,6
+computer-science,robotics-autonomous-systems,Robotics & Autonomous Systems,7
+computer-science,human-computer-interaction,Human-Computer Interaction,8
+computer-science,software-engineering,Software Engineering,9
+computer-science,cybersecurity,Cybersecurity,10
+computer-science,distributed-systems-cloud,Distributed Systems & Cloud,11
+computer-science,embedded-systems,Embedded & Cyber-Physical Systems,12
+computer-science,theoretical-computer-science,Theoretical Computer Science,13
+computer-science,scientific-computing,Scientific Computing & Simulation,14
+computer-science,bioinformatics,Bioinformatics,15
+computer-science,cognitive-science,Cognitive Science,16
+engineering,mechanical-engineering,Mechanical Engineering,1
+engineering,electrical-engineering,Electrical & Electronic Engineering,2
+engineering,mechatronics,Mechatronics,3
+engineering,automotive-engineering,Automotive Engineering,4
+engineering,aerospace-engineering,Aerospace Engineering,5
+engineering,civil-engineering,Civil & Structural Engineering,6
+engineering,chemical-engineering,Chemical & Process Engineering,7
+engineering,renewable-energy,Renewable Energy & Energy Systems,8
+engineering,materials-engineering,Materials Science & Engineering,9
+engineering,industrial-engineering,Industrial & Production Engineering,10
+engineering,biomedical-engineering,Biomedical Engineering,11
+engineering,communications-engineering,Communications & Information Technology,12
+engineering,digital-engineering,Digital Engineering,13
+business-economics,business-administration-mba,Business Administration / MBA,1
+business-economics,management,Management,2
+business-economics,finance,Finance & Banking,3
+business-economics,accounting,Accounting & Controlling,4
+business-economics,marketing,Marketing,5
+business-economics,economics,Economics,6
+business-economics,international-business,International Business,7
+business-economics,supply-chain-logistics,Supply Chain & Logistics,8
+business-economics,entrepreneurship,Entrepreneurship & Innovation,9
+business-economics,business-analytics,Business Analytics & Information Systems,10
+business-economics,engineering-management,Engineering & Technology Management,11
+natural-sciences,physics,Physics,1
+natural-sciences,chemistry,Chemistry,2
+natural-sciences,biology,Biology & Life Sciences,3
+natural-sciences,biotechnology,Biotechnology,4
+natural-sciences,mathematics,Mathematics,5
+natural-sciences,statistics,Statistics,6
+natural-sciences,earth-sciences,Earth & Geosciences,7
+natural-sciences,neuroscience,Neuroscience,8
+natural-sciences,environmental-science,Environmental Science,9
+natural-sciences,astrophysics,Astrophysics & Astronomy,10
+medicine-health,public-health,Public Health,1
+medicine-health,pharmacy,Pharmaceutical Sciences,2
+medicine-health,molecular-medicine,Molecular Medicine,3
+medicine-health,nursing,Nursing & Health Care,4
+medicine-health,health-management,Health Management & Economics,5
+medicine-health,nutrition,Nutrition Science,6
+medicine-health,medical-physics,Medical Physics & Imaging,7
+medicine-health,psychology-clinical,Clinical Psychology,8
+social-sciences,political-science,Political Science,1
+social-sciences,international-relations,International Relations,2
+social-sciences,sociology,Sociology,3
+social-sciences,psychology,Psychology,4
+social-sciences,development-studies,Development Studies,5
+social-sciences,media-communication,Media & Communication,6
+social-sciences,public-policy,Public Policy & Administration,7
+social-sciences,human-geography,Human Geography,8
+law,international-law,International Law,1
+law,european-law,European Law,2
+law,business-law,Business & Commercial Law,3
+law,human-rights-law,Human Rights Law,4
+law,ip-it-law,Intellectual Property & IT Law,5
+law,comparative-law,Comparative Law (LL.M.),6
+arts-design,communication-design,Communication & Graphic Design,1
+arts-design,product-design,Product & Industrial Design,2
+arts-design,interaction-design,Interaction & UX Design,3
+arts-design,fine-arts,Fine Arts,4
+arts-design,music,Music,5
+arts-design,film-media-arts,Film & Media Arts,6
+arts-design,fashion-textile,Fashion & Textile Design,7
+arts-design,game-design,Game Design,8
+humanities,linguistics,Linguistics,1
+humanities,literature,Literature,2
+humanities,history,History,3
+humanities,philosophy,Philosophy,4
+humanities,cultural-studies,Cultural Studies,5
+humanities,translation-interpreting,Translation & Interpreting,6
+humanities,german-studies,German Studies,7
+humanities,religious-studies,Religious Studies,8
+education,educational-science,Educational Science,1
+education,teaching-english,Teaching English (TESOL),2
+education,international-education,International Education,3
+education,educational-technology,Educational Technology,4
+education,special-education,Special & Inclusive Education,5
+agriculture-environment,agricultural-science,Agricultural Science,1
+agriculture-environment,food-science,Food Science & Technology,2
+agriculture-environment,forestry,Forestry,3
+agriculture-environment,environmental-management,Environmental Management,4
+agriculture-environment,water-resources,Water Resources Management,5
+agriculture-environment,sustainability,Sustainability Studies,6
+architecture,architecture,Architecture,1
+architecture,urban-planning,Urban & Regional Planning,2
+architecture,landscape-architecture,Landscape Architecture,3
+architecture,real-estate,Real Estate & Facility Management,4
+architecture,building-technology,Building Technology & Sustainable Construction,5

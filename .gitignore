@@ -1,0 +1,16 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.env
+.env.local
+*.local
+.DS_Store
+supabase/.branches/
+supabase/.temp/
+__pycache__/
+supabase/functions/.env
+# Local-only reference data (not redistributed)
+data/reference/
+scripts/decode_reference_data.py

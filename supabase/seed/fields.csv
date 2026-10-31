@@ -1,0 +1,13 @@
+slug,name,isced_code,icon,color,sop_template,sort_order
+computer-science,Computer Science,06,code,#7C3AED,computer_science,1
+engineering,Engineering,07,gear,#2563EB,engineering_science,2
+business-economics,Business & Economics,04,briefcase,#0D9488,business,3
+natural-sciences,Natural Sciences & Mathematics,05,flask,#16A34A,engineering_science,4
+medicine-health,Medicine & Health,09,heart,#DC2626,medicine_health,5
+social-sciences,Social Sciences,03,users,#DB2777,social_humanities,6
+law,Law,0421,scale,#92400E,law,7
+arts-design,Arts & Design,021,palette,#C026D3,arts_design,8
+humanities,Humanities & Languages,022,book,#9333EA,social_humanities,9
+education,Education,01,school,#EA580C,education,10
+agriculture-environment,Agriculture & Environment,08,leaf,#65A30D,engineering_science,11
+architecture,Architecture & Urban Planning,0731,building,#475569,arts_design,12

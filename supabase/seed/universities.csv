@@ -1,0 +1,50 @@
+slug,name,type,city,state,lat,lng,qs_ranking,qs_ranking_sort
+bauhaus-university-weimar,Bauhaus University Weimar,university,Weimar,Thuringia,50.9795,11.3235,,
+brandenburg-university-of-technology-cottbus-senftenberg,Brandenburg University of Technology Cottbus-Senftenberg,technical_university,Cottbus,Brandenburg,51.7675,14.328,,
+deggendorf-institute-of-technology,Deggendorf Institute of Technology,university_applied_sciences,Deggendorf,Bavaria,48.8295,12.9546,,
+fau-erlangen-nurnberg,FAU Erlangen-Nürnberg,university,Erlangen,Bavaria,49.5978,11.0046,218,218
+fulda-university-of-applied-sciences,Fulda University of Applied Sciences,university_applied_sciences,Fulda,Hesse,50.5651,9.6868,,
+heidelberg-university,Heidelberg University,university,Heidelberg,Baden-Württemberg,49.4192,8.6702,86,86
+hochschule-bonn-rhein-sieg,Hochschule Bonn-Rhein-Sieg,university_applied_sciences,Sankt Augustin,North Rhine-Westphalia,50.7809,7.1827,,
+hof-university-of-applied-sciences,Hof University of Applied Sciences,university_applied_sciences,Hof,Bavaria,50.3167,11.9167,,
+kiel-university,Kiel University,university,Kiel,Schleswig-Holstein,54.3435,10.115,620,620
+kiel-university-of-applied-sciences,Kiel University of Applied Sciences,university_applied_sciences,Kiel,Schleswig-Holstein,54.3326,10.1803,,
+osnabruck-university,Osnabrück University,university,Osnabrück,Lower Saxony,52.2719,8.0447,,
+otto-von-guericke-university-magdeburg,Otto von Guericke University Magdeburg,university,Magdeburg,Saxony-Anhalt,52.1397,11.6404,646,646
+paderborn-university,Paderborn University,university,Paderborn,North Rhine-Westphalia,51.7082,8.7722,1201-1400,1201
+philipps-university-marburg,Philipps University Marburg,university,Marburg,Hesse,50.8102,8.774,951-1000,951
+rptu-kaiserslautern-landau,RPTU Kaiserslautern-Landau,university,Kaiserslautern,Rhineland-Palatinate,49.4255,7.7551,1401+,1401
+rhine-waal-university-of-applied-sciences,Rhine-Waal University of Applied Sciences,university_applied_sciences,Kleve,North Rhine-Westphalia,51.7945,6.14,,
+saarland-university,Saarland University,university,Saarbrücken,Saarland,49.2549,7.0427,588,588
+tu-berlin,TU Berlin,technical_university,Berlin,Berlin,52.5122,13.327,158,158
+tu-braunschweig,TU Braunschweig,technical_university,Braunschweig,Lower Saxony,52.2736,10.5297,781-790,781
+tu-chemnitz,TU Chemnitz,technical_university,Chemnitz,Saxony,50.8391,12.9277,1001-1200,1001
+tu-clausthal,TU Clausthal,technical_university,Clausthal-Zellerfeld,Lower Saxony,51.8047,10.34,,
+tu-darmstadt,TU Darmstadt,technical_university,Darmstadt,Hesse,49.8776,8.6546,250,250
+tu-dortmund,TU Dortmund,technical_university,Dortmund,North Rhine-Westphalia,51.4895,7.4147,691,691
+tu-hamburg,TU Hamburg,technical_university,Hamburg,Hamburg,53.4631,9.9696,721-730,721
+tu-ilmenau,TU Ilmenau,technical_university,Ilmenau,Thuringia,50.6814,10.939,,
+technical-university-of-applied-sciences-wurzburg-schweinfurt-thws,Technical University of Applied Sciences Würzburg-Schweinfurt — THWS,university_applied_sciences,Würzburg,Bavaria,49.7939,9.9512,,
+technische-hochschule-ingolstadt,Technische Hochschule Ingolstadt,university_applied_sciences,Ingolstadt,Bavaria,48.767,11.432,,
+trier-university,Trier University,university,Trier,Rhineland-Palatinate,49.7475,6.6876,1401+,1401
+university-of-bamberg,University of Bamberg,university,Bamberg,Bavaria,49.8987,10.9003,1201-1400,1201
+university-of-bayreuth,University of Bayreuth,university,Bayreuth,Bavaria,49.9262,11.5852,472,472
+university-of-bonn,University of Bonn,university,Bonn,North Rhine-Westphalia,50.7261,7.0897,209,209
+university-of-bremen,University of Bremen,university,Bremen,Bremen,53.1089,8.8534,581,581
+university-of-freiburg,University of Freiburg,university,Freiburg,Baden-Württemberg,47.9936,7.8466,245,245
+university-of-gottingen,University of Göttingen,university,Göttingen,Lower Saxony,51.5415,9.9376,261,261
+university-of-hildesheim,University of Hildesheim,university,Hildesheim,Lower Saxony,52.1467,9.957,,
+university-of-kassel,University of Kassel,university,Kassel,Hesse,51.3227,9.5072,1201-1400,1201
+university-of-koblenz,University of Koblenz,university,Koblenz,Rhineland-Palatinate,50.3636,7.569,,
+university-of-lubeck,University of Lübeck,university,Lübeck,Schleswig-Holstein,53.837,10.702,,
+university-of-mannheim,University of Mannheim,university,Mannheim,Baden-Württemberg,49.4833,8.4644,425,425
+university-of-passau,University of Passau,university,Passau,Bavaria,48.5678,13.4528,1201-1400,1201
+university-of-potsdam,University of Potsdam,university,Potsdam,Brandenburg,52.401,13.0119,500,500
+university-of-regensburg,University of Regensburg,university,Regensburg,Bavaria,48.9968,12.0958,696,696
+university-of-siegen,University of Siegen,university,Siegen,North Rhine-Westphalia,50.9111,8.0254,1201-1400,1201
+university-of-stuttgart,University of Stuttgart,university,Stuttgart,Baden-Württemberg,48.7816,9.1724,318,318
+university-of-wurzburg,University of Würzburg,university,Würzburg,Bavaria,49.7813,9.9722,430,430
+university-of-hohenheim,University of Hohenheim,university,Stuttgart,Baden-Württemberg,48.713380,9.212073,,
+technical-university-of-munich,Technical University of Munich,technical_university,Munich,Bavaria,48.149072,11.567446,,
+university-of-erfurt,University of Erfurt,university,Erfurt,Thuringia,50.990927,11.009547,,
+anhalt-university-of-applied-sciences,Anhalt University of Applied Sciences,university_applied_sciences,Dessau-Roßlau,Saxony-Anhalt,51.839841,12.228009,,

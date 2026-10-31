@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+
+  database:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Generated files are up to date
+        run: |
+          python3 -I scripts/build_seed.py
+          python3 -I scripts/gen_status_pgtap.py
+          python3 -I scripts/sync_function_shared.py
+          git diff --exit-code supabase/seed.sql supabase/tests/status_parity.test.sql supabase/functions/_shared
+      - run: supabase start -x studio,imgproxy,logflare,vector,realtime,mailpit,supavisor,postgres-meta
+      - run: supabase test db
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Public API matches shared schemas
+        run: |
+          export FLYMS_API_URL=http://127.0.0.1:54321
+          export FLYMS_ANON_KEY=$(supabase status -o json | jq -r .ANON_KEY)
+          pnpm --filter @flyms/shared test
+      - name: Serve Edge Functions (Cloudflare Turnstile test keys)
+        run: |
+          printf 'TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA\nRATE_LIMIT_SECRET=ci\nALLOWED_ORIGINS=http://localhost:5173\n' > supabase/functions/.env
+          supabase functions serve --env-file supabase/functions/.env &
+      - name: E2E (desktop + mobile)
+        run: |
+          printf 'VITE_SUPABASE_URL=http://127.0.0.1:54321\nVITE_SUPABASE_ANON_KEY=%s\nVITE_TURNSTILE_SITE_KEY=1x00000000000000000000AA\n' "$(supabase status -o json | jq -r .ANON_KEY)" > apps/web/.env.local
+          pnpm exec playwright install --with-deps chromium
+          pnpm test:e2e

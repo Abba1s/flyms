@@ -1,0 +1,59 @@
+/* Design tokens — see docs/04-DESIGN-BRIEF.md §3. Values are RGB triplets for Tailwind alpha support. */
+
+:root {
+  color-scheme: light;
+  --bg: 247 248 251;
+  --surface: 255 255 255;
+  --surface-2: 238 241 246;
+  --border: 220 225 234;
+  --text: 17 24 39;
+  --muted: 91 100 116;
+  --primary: 67 56 202;
+  --primary-contrast: 255 255 255;
+  --danger: 194 65 12;
+
+  /* Admission status — reserved for status only */
+  --st-open: 22 101 52;
+  --st-closing: 146 64 14;
+  --st-opening: 7 89 133;
+  --st-closed: 75 85 99;
+  --st-unknown: 156 163 175;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: 14 17 23;
+  --surface: 22 27 34;
+  --surface-2: 31 38 48;
+  --border: 45 54 67;
+  --text: 230 234 240;
+  --muted: 154 164 178;
+  --primary: 139 133 255;
+  --primary-contrast: 14 17 23;
+  --danger: 249 115 102;
+  --st-open: 74 222 128;
+  --st-closing: 251 191 36;
+  --st-opening: 56 189 248;
+  --st-closed: 156 163 175;
+  --st-unknown: 75 85 99;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: 14 17 23;
+    --surface: 22 27 34;
+    --surface-2: 31 38 48;
+    --border: 45 54 67;
+    --text: 230 234 240;
+    --muted: 154 164 178;
+    --primary: 139 133 255;
+    --primary-contrast: 14 17 23;
+    --danger: 249 115 102;
+    --st-open: 74 222 128;
+    --st-closing: 251 191 36;
+    --st-opening: 56 189 248;
+    --st-closed: 156 163 175;
+    --st-unknown: 75 85 99;
+  }
+}

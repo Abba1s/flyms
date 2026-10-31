@@ -1,0 +1,7 @@
+pnpm-lock.yaml
+dist/
+coverage/
+data/reference/
+supabase/seed.sql
+supabase/seed/
+docs/

@@ -1,0 +1,132 @@
+.fly-map {
+  /* Keep Leaflet's pane z-indexes (400–700) inside the map, below dialogs and sheets. */
+  isolation: isolate;
+  z-index: 0;
+  background: rgb(var(--surface-2));
+  font-family: inherit;
+}
+.fly-map .leaflet-tile-pane {
+  filter: saturate(0.55) contrast(0.95);
+}
+.fly-map--filter-dark .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.85) saturate(0.4);
+}
+.fly-map .leaflet-control-attribution {
+  background: rgb(var(--surface) / 0.85);
+  color: rgb(var(--muted));
+  font-size: 10px;
+}
+.fly-map .leaflet-control-attribution a {
+  color: rgb(var(--muted));
+}
+.fly-map .leaflet-control-zoom a {
+  background: rgb(var(--surface));
+  color: rgb(var(--text));
+  border-color: rgb(var(--border));
+}
+
+/* Status pins — a teardrop with a white glyph and an "open now" badge. */
+.fly-pin {
+  --pin: var(--st-unknown);
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: rgb(var(--pin));
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgb(16 24 40 / 0.35);
+  display: grid;
+  place-items: center;
+  transition: transform 150ms ease-out;
+}
+.fly-pin__glyph {
+  width: 15px;
+  height: 15px;
+  color: #fff;
+  transform: rotate(45deg);
+}
+.fly-pin__badge {
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  transform: rotate(45deg);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #fff;
+  color: rgb(17 24 39);
+  font:
+    700 11px/18px 'Inter Variable',
+    system-ui,
+    sans-serif;
+  text-align: center;
+  box-shadow: 0 1px 3px rgb(16 24 40 / 0.3);
+}
+.fly-pin--open {
+  --pin: var(--st-open);
+}
+.fly-pin--closing_soon {
+  --pin: var(--st-closing);
+  animation: fly-pulse 1.2s ease-out 2;
+}
+.fly-pin--opening_soon {
+  --pin: var(--st-opening);
+}
+.fly-pin--closed {
+  --pin: var(--st-closed);
+  opacity: 0.6;
+}
+.fly-pin--unknown {
+  border-style: dashed;
+  opacity: 0.6;
+}
+.fly-pin--selected {
+  transform: rotate(-45deg) scale(1.18);
+  box-shadow:
+    0 0 0 3px rgb(var(--primary)),
+    0 4px 10px rgb(16 24 40 / 0.4);
+}
+.leaflet-marker-icon:focus-visible .fly-pin {
+  box-shadow: 0 0 0 3px rgb(var(--primary));
+}
+
+@keyframes fly-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(var(--st-closing) / 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgb(var(--st-closing) / 0);
+  }
+}
+
+.fly-cluster {
+  --pin: var(--st-unknown);
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgb(var(--pin));
+  color: #fff;
+  font:
+    700 14px 'Inter Variable',
+    system-ui,
+    sans-serif;
+  border: 3px solid #fff;
+  box-shadow:
+    0 0 0 4px rgb(var(--pin) / 0.3),
+    0 2px 8px rgb(16 24 40 / 0.3);
+}
+.fly-cluster--open {
+  --pin: var(--st-open);
+}
+.fly-cluster--closing_soon {
+  --pin: var(--st-closing);
+}
+.fly-cluster--opening_soon {
+  --pin: var(--st-opening);
+}
+.fly-cluster--closed {
+  --pin: var(--st-closed);
+}
