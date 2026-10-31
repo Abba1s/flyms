@@ -13,7 +13,6 @@ import {
   MapIcon,
   MoonIcon,
   MoreIcon,
-  PlaneIcon,
   PenIcon,
   PlusIcon,
   SearchIcon,
@@ -53,10 +52,14 @@ function Logo() {
       to="/"
       className="flex items-center gap-2 font-display text-sm font-bold leading-tight tracking-tight"
     >
-      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-primary text-primary-contrast">
-        <PlaneIcon className="h-[18px] w-[18px]" />
+      <span className="shrink-0 rounded-md bg-white px-0.5 py-0.5">
+        <img src="/logo-mark.png" alt="" width={50} height={30} className="h-[30px] w-auto" />
       </span>
-      <span className="max-w-[11rem]">Universal Travel and Education Consultancy</span>
+      <span className="whitespace-nowrap text-[13px] md:text-xs">
+        Universal Travel and
+        <br />
+        Education Consultancy
+      </span>
     </Link>
   );
 }

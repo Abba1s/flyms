@@ -18,7 +18,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon-64.png', 'apple-touch-icon.png', 'logo-mark.png'],
       manifest: {
         name: 'Universal Travel and Education Consultancy',
         short_name: 'UTEC',
@@ -51,7 +51,14 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
-        globIgnores: [...LAZY_CHUNKS, 'og.png', '**/*cyrillic*', '**/*greek*', '**/*vietnamese*'],
+        globIgnores: [
+          ...LAZY_CHUNKS,
+          'og.png',
+          'logo-full.png',
+          '**/*cyrillic*',
+          '**/*greek*',
+          '**/*vietnamese*',
+        ],
         navigateFallback: '/index.html',
         // Admin pages and prerendered program pages are always fetched from the network.
         navigateFallbackDenylist: [/^\/admin/],

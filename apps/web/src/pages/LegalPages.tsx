@@ -107,6 +107,13 @@ export function PrivacyPage() {
 export function AboutPage() {
   return (
     <Doc title="About Universal Travel and Education Consultancy">
+      <img
+        src="/logo-full.png"
+        alt="Universal Travel and Education Consultancy logo"
+        width={480}
+        height={488}
+        className="h-auto w-64 self-start rounded-lg bg-white p-3"
+      />
       <p>
         Universal Travel and Education Consultancy helps international students find master’s
         programs in Germany in any field, see on a map where admissions are open right now, keep
