@@ -14,3 +14,5 @@ supabase/functions/.env
 # Local-only reference data (not redistributed)
 data/reference/
 scripts/decode_reference_data.py
+.vercel
+.env*
