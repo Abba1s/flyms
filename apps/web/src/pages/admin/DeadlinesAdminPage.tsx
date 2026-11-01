@@ -188,9 +188,17 @@ export function DeadlinesAdminPage() {
       </section>
 
       <section className="rounded-lg border border-border bg-surface">
-        <h2 className="border-b border-border px-4 py-3 font-semibold">
-          Needs review <span className="tabular-nums text-muted">· {flagged.length}</span>
-        </h2>
+        <div className="border-b border-border px-4 py-3">
+          <h2 className="font-semibold">
+            Needs review <span className="tabular-nums text-muted">· {flagged.length}</span>
+          </h2>
+          <p className="text-xs text-muted">
+            Both buttons count as checking the program: its “Deadline not verified” badge disappears
+            from the public site for 180 days. “Apply date” also changes the deadline visitors see;
+            “Dismiss” / “Mark reviewed” keeps the current one. Check the official page before
+            choosing.
+          </p>
+        </div>
         {changes.isPending ? (
           <p className="px-4 py-3 text-sm text-muted">Loading…</p>
         ) : flagged.length === 0 ? (
