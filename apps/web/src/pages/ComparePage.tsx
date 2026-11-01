@@ -6,7 +6,13 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { usePrograms, type ProgramWithStatus } from '@/features/programs/api';
 import { DataState } from '@/features/programs/DataState';
 import { keyDateText } from '@/features/programs/ProgramCard';
-import { LANGUAGE_LABEL, PORTAL_LABEL, intakeLabel, yesNo } from '@/features/programs/labels';
+import {
+  LANGUAGE_LABEL,
+  PORTAL_LABEL,
+  degreeLabel,
+  intakeLabel,
+  yesNo,
+} from '@/features/programs/labels';
 import { SaveButton } from '@/features/programs/SaveButton';
 import { formatEuro } from '@/lib/format';
 import { useLocalStore } from '@/stores/local';
@@ -17,7 +23,7 @@ const ROWS: [string, (p: ProgramWithStatus) => ReactNode][] = [
   ['Intakes', (p) => p.intakes.map(intakeLabel).join(', ') || '—'],
   ['University', (p) => `${p.university_name}, ${p.city}`],
   ['QS ranking', (p) => p.qs_ranking ?? '—'],
-  ['Degree', (p) => p.degree_type],
+  ['Degree', (p) => degreeLabel(p.degree_type)],
   ['Teaching language', (p) => LANGUAGE_LABEL[p.teaching_language]],
   ['IELTS minimum', (p) => p.ielts_min?.toFixed(1) ?? 'Not stated'],
   ['MOI accepted', (p) => yesNo(p.moi_accepted)],

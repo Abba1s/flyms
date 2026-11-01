@@ -47,6 +47,8 @@ export const publicProgramSchema = z.object({
   qs_ranking_sort: z.number().nullable(),
   specialization_slugs: z.array(z.string()),
   intakes: z.array(intakeSchema),
+  /** 'daad' when the program was imported automatically from DAAD. */
+  origin: z.enum(['manual', 'daad']).optional(),
 });
 export type PublicProgram = z.infer<typeof publicProgramSchema>;
 

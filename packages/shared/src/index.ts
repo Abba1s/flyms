@@ -4,3 +4,16 @@ export * from './schemas';
 export * from './submissions';
 export * from './sop';
 export * from './sopText';
+export {
+  canonicalCity,
+  durationSemesters,
+  findUniversity,
+  inferDegree,
+  inferIntake,
+  subjectToField,
+  teachingLanguage,
+  tuition,
+  universityType,
+  type FieldSlug,
+  type UniversityRef,
+} from './daadImport';

@@ -66,15 +66,24 @@ export interface AdminProgramRow {
 export function useAdminPrograms() {
   return useQuery({
     queryKey: adminKeys.programs,
-    queryFn: async () =>
-      unwrap<AdminProgramRow[]>(
-        await supabase
-          .from('programs')
-          .select(
-            'id, slug, name, state, deleted_at, last_verified_at, updated_at, field_id, university_id, universities(name, slug), fields(name, slug)',
-          )
-          .order('updated_at', { ascending: false }),
-      ),
+    queryFn: async () => {
+      // More than 1,000 programs once DAAD imports run; PostgREST caps each request at 1,000.
+      const rows: AdminProgramRow[] = [];
+      for (let from = 0; ; from += 1000) {
+        const page = unwrap<AdminProgramRow[]>(
+          await supabase
+            .from('programs')
+            .select(
+              'id, slug, name, state, deleted_at, last_verified_at, updated_at, field_id, university_id, universities(name, slug), fields(name, slug)',
+            )
+            .order('updated_at', { ascending: false })
+            .order('id')
+            .range(from, from + 999),
+        );
+        rows.push(...page);
+        if (page.length < 1000) return rows;
+      }
+    },
   });
 }
 

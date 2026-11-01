@@ -23,6 +23,9 @@ interface SyncRun {
   updated: number;
   flagged: number;
   auto_linked: number;
+  imported: number;
+  universities_created: number;
+  import_skipped: number;
   error: string | null;
 }
 
@@ -134,10 +137,12 @@ export function DeadlinesAdminPage() {
         updated: number;
         flagged: number;
         autoLinked: number;
+        imported: number;
+        universitiesCreated: number;
       }>('deadline-sync', { body: {} });
       if (error) throw error;
       toast(
-        `Checked ${data!.checked} programs against ${data!.courses} DAAD courses · ${data!.verified} verified, ${data!.updated} updated, ${data!.flagged} flagged, ${data!.autoLinked} newly linked`,
+        `Added ${data!.imported} new programs and ${data!.universitiesCreated} universities from DAAD · checked ${data!.checked} programs: ${data!.verified} verified, ${data!.updated} updated, ${data!.flagged} flagged`,
       );
     } catch (err) {
       toast(errorMessage(err));
@@ -157,10 +162,11 @@ export function DeadlinesAdminPage() {
         <div>
           <h1 className="text-2xl font-bold">Deadline sync</h1>
           <p className="max-w-2xl text-sm text-muted">
-            Every 12 hours, deadlines are checked against the DAAD international programmes
-            database. Matching dates are marked verified, small moves are applied automatically, and
-            anything else lands here for review. Hochschulkompass blocks automated access, so its
-            links are for checking by hand.
+            Every 12 hours (or when you press “Sync now”), programs with an upcoming deadline on the
+            DAAD international programmes database are added to the site with their universities,
+            and existing deadlines are checked. Matching dates are marked verified, small moves are
+            applied automatically, and anything else lands here for review. Hochschulkompass blocks
+            automated access, so its links are for checking by hand.
           </p>
         </div>
         <Button onClick={() => void run()} disabled={running}>
@@ -180,9 +186,14 @@ export function DeadlinesAdminPage() {
           <p className="text-muted">Started {dateTime(last.started_at)}, still running…</p>
         ) : (
           <p className="tabular-nums text-muted">
-            {dateTime(last.finished_at)} · {last.courses_fetched} DAAD courses · {last.checked}{' '}
-            linked programs checked · {last.verified} verified · {last.updated} updated ·{' '}
-            {last.flagged} flagged · {last.auto_linked} newly linked
+            {dateTime(last.finished_at)} · {last.courses_fetched} DAAD courses ·{' '}
+            <strong className="text-text">
+              {last.imported} new programs, {last.universities_created} new universities
+            </strong>{' '}
+            · {last.checked} linked programs checked · {last.verified} verified · {last.updated}{' '}
+            updated · {last.flagged} flagged · {last.auto_linked} newly linked
+            {last.import_skipped > 0 &&
+              ` · ${last.import_skipped} skipped (subject or location unknown)`}
           </p>
         )}
       </section>
@@ -324,15 +335,22 @@ function SourceLinks() {
   const { data, isPending } = useQuery({
     queryKey: keys.sources,
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('programs')
-        .select(
-          'id, name, state, program_sources(source, external_id, url, matched_by, last_status, last_checked_at)',
-        )
-        .is('deleted_at', null)
-        .order('name');
-      if (error) throw error;
-      return data as SourceRow[];
+      const rows: SourceRow[] = [];
+      for (let from = 0; ; from += 1000) {
+        const { data, error } = await supabase
+          .from('programs')
+          .select(
+            'id, name, state, program_sources(source, external_id, url, matched_by, last_status, last_checked_at)',
+          )
+          .is('deleted_at', null)
+          .eq('origin', 'manual')
+          .order('name')
+          .order('id')
+          .range(from, from + 999);
+        if (error) throw error;
+        rows.push(...(data as SourceRow[]));
+        if (data.length < 1000) return rows;
+      }
     },
   });
 
@@ -402,9 +420,9 @@ function SourceLinks() {
         <div>
           <h2 className="font-semibold">Official source links</h2>
           <p className="text-xs text-muted">
-            {linked} of {data?.length ?? 0} programs linked to DAAD. The sync links exact name
-            matches by itself; paste a DAAD course number or link for the rest. Clear a field to
-            unlink.
+            {linked} of {data?.length ?? 0} programs you added yourself are linked to DAAD (imported
+            programs are always linked). The sync links exact name matches by itself; paste a DAAD
+            course number or link for the rest. Clear a field to unlink.
           </p>
         </div>
         <input

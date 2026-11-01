@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/Badge';
 import { StatusBadge, UnverifiedBadge } from '@/components/ui/StatusBadge';
 import { formatDate } from '@/lib/format';
 import type { ProgramWithStatus } from './api';
-import { LANGUAGE_LABEL, intakeLabel } from './labels';
+import { LANGUAGE_LABEL, degreeLabel, intakeLabel } from './labels';
 import { CompareToggle } from '@/features/compare/CompareToggle';
 import { SaveButton } from './SaveButton';
 
@@ -30,7 +30,7 @@ export function keyDateText(p: ProgramWithStatus): string | null {
 export function RequirementChips({ program: p }: { program: ProgramWithStatus }) {
   return (
     <div className="flex flex-wrap gap-1.5">
-      <Badge>{p.degree_type}</Badge>
+      <Badge>{degreeLabel(p.degree_type)}</Badge>
       <Badge>{LANGUAGE_LABEL[p.teaching_language]}</Badge>
       {p.intakes[0] && <Badge>{intakeLabel(p.intakes[0])}</Badge>}
       {p.ielts_min !== null && <Badge>IELTS {p.ielts_min.toFixed(1)}</Badge>}

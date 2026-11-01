@@ -27,10 +27,20 @@ export const queryKeys = {
   program: (slug: string) => ['program', slug] as const,
 };
 
+/** PostgREST returns at most 1,000 rows per request, so read the list in pages. */
 async function fetchPrograms(): Promise<PublicProgram[]> {
-  const { data, error } = await supabase.from('v_public_programs').select('*');
-  if (error) throw error;
-  return z.array(publicProgramSchema).parse(data);
+  const rows: unknown[] = [];
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await supabase
+      .from('v_public_programs')
+      .select('*')
+      .order('id')
+      .range(from, from + 999);
+    if (error) throw error;
+    rows.push(...data);
+    if (data.length < 1000) break;
+  }
+  return z.array(publicProgramSchema).parse(rows);
 }
 
 async function fetchFields(): Promise<Field[]> {
@@ -113,6 +123,7 @@ const detailSchema = z.object({
   letter_note: z.string().nullable(),
   last_verified_at: z.string().nullable(),
   source_url: z.string().nullable(),
+  origin: z.enum(['manual', 'daad']).optional(),
   field_slug: z.string(),
   field_name: z.string(),
   university_slug: z.string(),

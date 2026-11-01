@@ -10,6 +10,7 @@ import {
   LANGUAGE_LABEL,
   PORTAL_LABEL,
   STALE_AFTER_DAYS,
+  degreeLabel,
   intakeLabel,
   yesNo,
 } from '@/features/programs/labels';
@@ -80,6 +81,7 @@ export function ProgramPage() {
   }
 
   const status = getProgramStatus(p.intakes, today);
+  const fromDaad = p.origin === 'daad';
   const stale = !p.last_verified_at || daysBetween(p.last_verified_at, today) > STALE_AFTER_DAYS;
   const field = fieldMap.get(p.field_slug);
 
@@ -120,7 +122,7 @@ export function ProgramPage() {
         </div>
         <div className="flex flex-wrap gap-1.5">
           <Badge>{p.field_name}</Badge>
-          <Badge>{p.degree_type}</Badge>
+          <Badge>{degreeLabel(p.degree_type)}</Badge>
           <Badge>{LANGUAGE_LABEL[p.teaching_language] ?? p.teaching_language}-taught</Badge>
           {p.specializations.map((s) => (
             <Badge key={s.slug}>{s.name}</Badge>
@@ -134,9 +136,13 @@ export function ProgramPage() {
             rel="noopener noreferrer"
             className="inline-flex h-10 items-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-primary-contrast hover:bg-primary/90"
           >
-            Apply
+            {fromDaad ? 'Details & how to apply' : 'Apply'}
             <ExternalIcon className="h-4 w-4" />
-            <span className="sr-only">(opens official site in a new tab)</span>
+            <span className="sr-only">
+              {fromDaad
+                ? '(opens the DAAD listing in a new tab)'
+                : '(opens official site in a new tab)'}
+            </span>
           </a>
           <Link
             to={`/sop/new?program=${p.id}`}
@@ -144,16 +150,24 @@ export function ProgramPage() {
           >
             Write SOP
           </Link>
-          <a
-            href={p.official_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-4 text-sm font-semibold hover:bg-surface-2"
-          >
-            Official page
-            <ExternalIcon className="h-4 w-4" />
-          </a>
+          {!fromDaad && (
+            <a
+              href={p.official_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-4 text-sm font-semibold hover:bg-surface-2"
+            >
+              Official page
+              <ExternalIcon className="h-4 w-4" />
+            </a>
+          )}
         </div>
+        {fromDaad && (
+          <p className="text-sm text-muted">
+            Listed automatically from the DAAD International Programmes database. Requirements
+            marked “Not stated” are on the DAAD and university pages.
+          </p>
+        )}
         {p.summary && <p className="text-base">{p.summary}</p>}
       </header>
 
@@ -299,7 +313,11 @@ export function ProgramPage() {
 
       <footer className="text-xs text-muted">
         Source:{' '}
-        {p.source_url ? (
+        {fromDaad && p.source_url ? (
+          <a href={p.source_url} target="_blank" rel="noopener noreferrer" className="underline">
+            DAAD International Programmes database
+          </a>
+        ) : p.source_url ? (
           <a href={p.source_url} target="_blank" rel="noopener noreferrer" className="underline">
             official program page
           </a>

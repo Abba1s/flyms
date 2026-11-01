@@ -195,7 +195,7 @@ export function FilterControls({
           <option value="">Any</option>
           {DEGREE_OPTIONS.map((d) => (
             <option key={d} value={d}>
-              {d}
+              {d === 'Other' ? "Master's (degree not stated)" : d}
             </option>
           ))}
         </Select>

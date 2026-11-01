@@ -52,15 +52,21 @@ const STATIC_ROUTES = [
 async function fetchPrograms() {
   if (!API || !KEY) return null;
   try {
-    const res = await fetch(
-      `${API}/rest/v1/v_public_program_detail?select=slug,name,university_name,city,summary,degree_type,teaching_language,official_url,field_name,intakes,tuition_fee_eur,updated_at`,
-      {
-        headers: { apikey: KEY, Authorization: `Bearer ${KEY}` },
-        signal: AbortSignal.timeout(15_000),
-      },
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    // PostgREST returns at most 1,000 rows per request.
+    const rows = [];
+    for (let from = 0; ; from += 1000) {
+      const res = await fetch(
+        `${API}/rest/v1/v_public_program_detail?select=slug,name,university_name,city,summary,degree_type,teaching_language,official_url,field_name,intakes,tuition_fee_eur,updated_at&order=slug`,
+        {
+          headers: { apikey: KEY, Authorization: `Bearer ${KEY}`, Range: `${from}-${from + 999}` },
+          signal: AbortSignal.timeout(30_000),
+        },
+      );
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const page = await res.json();
+      rows.push(...page);
+      if (page.length < 1000) return rows;
+    }
   } catch (err) {
     console.warn(
       `[prerender] Could not load programs (${err.message}); writing static files only.`,
@@ -79,7 +85,7 @@ function describe(p) {
   const fee = p.tuition_fee_eur === 0 ? ' No tuition.' : '';
   return (
     (p.summary ||
-      `${p.degree_type} ${p.name} at ${p.university_name}, ${p.city}. ${language} ${p.field_name} program.`) +
+      `${p.degree_type === 'Other' ? "Master's" : p.degree_type} ${p.name} at ${p.university_name}, ${p.city}. ${language} ${p.field_name} program.`) +
     deadline +
     fee
   );
@@ -93,7 +99,7 @@ function jsonLd(p, url) {
     name: p.name,
     url,
     sameAs: p.official_url,
-    educationalCredentialAwarded: p.degree_type,
+    educationalCredentialAwarded: p.degree_type === 'Other' ? "Master's degree" : p.degree_type,
     inLanguage: p.teaching_language === 'german' ? 'de' : 'en',
     provider: {
       '@type': 'CollegeOrUniversity',
