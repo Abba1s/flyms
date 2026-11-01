@@ -8,6 +8,7 @@ export {
   canonicalCity,
   durationSemesters,
   findUniversity,
+  importSlug,
   inferDegree,
   inferIntake,
   subjectToField,

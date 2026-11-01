@@ -3,7 +3,18 @@
  * `deadline-sync` Edge Function and tests.
  */
 import { normalizeName } from './deadlines.ts';
+import { slugify } from './submissions.ts';
 export { programSlug, slugify } from './submissions.ts';
+
+const DEGREE_PREFIX =
+  /^(?:M\.?\s?(?:Sc|A|Eng|BA|Ed|FA|PH|Res)\b\.?|LL\.?\s?M\.?|MBA|Master(?:'s)?(?:\s+of\s+(?:Science|Arts|Engineering|Business Administration|Laws|Education|Fine Arts|Public Health|Research))?)\s*(?:\(\w+\)\s*)?(?:in\s+|of\s+|[-–:,]\s*)?/i;
+
+/** URL slug for an imported program: university + title without the degree words (+ degree if known). */
+export function importSlug(universitySlug: string, courseName: string, degree: string): string {
+  const title = courseName.trim().replace(DEGREE_PREFIX, '') || courseName;
+  const suffix = degree === 'Other' ? '' : `-${degree.toLowerCase()}`;
+  return `${universitySlug}-${slugify(title)}${suffix}`;
+}
 
 export type FieldSlug =
   | 'computer-science'

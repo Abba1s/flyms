@@ -3,6 +3,7 @@ import {
   canonicalCity,
   durationSemesters,
   findUniversity,
+  importSlug,
   inferDegree,
   inferIntake,
   subjectToField,
@@ -100,6 +101,21 @@ describe('small mappers', () => {
     expect(universityType('Hamburg University of Technology')).toBe('technical_university');
     expect(universityType('Max Planck Institute for the Science of Light')).toBe('other');
     expect(universityType('University of Freiburg')).toBe('university');
+  });
+});
+
+describe('importSlug', () => {
+  it('drops degree words and only adds a known degree', () => {
+    expect(importSlug('aalen-university', 'Master of Science in Applied Photonics', 'MSc')).toBe(
+      'aalen-university-applied-photonics-msc',
+    );
+    expect(importSlug('ude', 'Communications Engineering', 'Other')).toBe(
+      'ude-communications-engineering',
+    );
+    expect(importSlug('x', "Master's in Management", 'Other')).toBe('x-management');
+    expect(importSlug('x', 'M.Sc. Data Science', 'MSc')).toBe('x-data-science-msc');
+    expect(importSlug('x', 'Mathematics', 'Other')).toBe('x-mathematics');
+    expect(importSlug('x', 'MBA - Global Business', 'MBA')).toBe('x-global-business-mba');
   });
 });
 

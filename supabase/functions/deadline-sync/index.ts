@@ -19,7 +19,7 @@ import {
   findUniversity,
   inferDegree,
   inferIntake,
-  programSlug,
+  importSlug,
   slugify,
   subjectToField,
   teachingLanguage,
@@ -394,7 +394,7 @@ async function importNew(
       continue;
     }
     const degree = inferDegree(course.courseName);
-    let slug = programSlug(uni.slug, course.courseName, degree);
+    let slug = importSlug(uni.slug, course.courseName, degree);
     if (programSlugs.has(slug)) slug = `${slug}-${course.id}`;
     programSlugs.add(slug);
     existingNames.set(`${uni.id}|${normalizeName(course.courseName)}`, slug);
