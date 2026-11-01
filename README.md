@@ -36,8 +36,11 @@ Locally, `SOP_MOCK=1` in `supabase/functions/.env` returns a clearly-labelled te
    `supabase secrets set TURNSTILE_SECRET_KEY=… RATE_LIMIT_SECRET=… ALLOWED_ORIGINS=https://your-domain ANTHROPIC_API_KEY=… LINK_CHECK_SECRET=…`.
    Create the first admin with `scripts/create-admin.mjs`.
 2. **Weekly link check**: enable `pg_net` and schedule the job shown at the end of `supabase/migrations/20261031000012_link_status.sql` with your function URL and `LINK_CHECK_SECRET`.
-3. **Frontend** (Vercel; `vercel.json` included): set `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_TURNSTILE_SITE_KEY`, `SITE_URL` (for sitemap/canonical links), a keyed map tile provider (`VITE_MAP_TILES_*`) and optionally `VITE_PLAUSIBLE_DOMAIN`. The build prerenders one HTML page per program for search engines and link previews.
-4. Fill in the operator name and contact in `apps/web/src/pages/LegalPages.tsx` and have the privacy text reviewed.
+3. **Deadline sync (every 12 hours)**: the `deadline-sync` function checks deadlines against the DAAD international programmes database. The cron job is created by the migration and stays idle until two Vault secrets exist. Run this once in the SQL editor:
+   `select vault.create_secret('https://<ref>.supabase.co', 'project_url'); select vault.create_secret('<random>', 'deadline_sync_secret');`
+   Then `supabase secrets set DEADLINE_SYNC_SECRET=<same random>`. Review flagged deadlines and link programs to DAAD under **Admin → Deadline sync**. Hochschulkompass blocks automated access, so its links there are checked by hand.
+4. **Frontend** (Vercel; `vercel.json` included): set `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_TURNSTILE_SITE_KEY`, `SITE_URL` (for sitemap/canonical links), a keyed map tile provider (`VITE_MAP_TILES_*`) and optionally `VITE_PLAUSIBLE_DOMAIN`. The build prerenders one HTML page per program for search engines and link previews.
+5. Fill in the operator name and contact in `apps/web/src/pages/LegalPages.tsx` and have the privacy text reviewed.
 
 ## Common tasks
 

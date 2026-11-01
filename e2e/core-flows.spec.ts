@@ -9,7 +9,7 @@ test('home → field tile → map shows only open programs in that field', async
   await page.goto('/');
   await page.getByRole('link', { name: /Computer Science.*open now/ }).click();
   await expect(page).toHaveURL(/\/map\?field=computer-science/);
-  await expect(page.getByRole('radio', { name: /Open now/ })).toHaveAttribute(
+  await expect(page.getByRole('radio', { name: /Applications open/ })).toHaveAttribute(
     'aria-checked',
     'true',
   );
@@ -40,12 +40,12 @@ test('map: selecting a university shows its programs grouped by status', async (
 
 test('explore: filters live in the URL and survive reload', async ({ page }) => {
   await page.goto('/explore');
-  await page.getByRole('radio', { name: /Closing soon/ }).click();
-  await expect(page).toHaveURL(/status=closing/);
+  await page.getByRole('radio', { name: /Closing in 15 days/ }).click();
+  await expect(page).toHaveURL(/status=closing(&|$)/);
   const count = await page.getByRole('article').count();
   expect(count).toBeGreaterThan(0);
   await page.reload();
-  await expect(page.getByRole('radio', { name: /Closing soon/ })).toHaveAttribute(
+  await expect(page.getByRole('radio', { name: /Closing in 15 days/ })).toHaveAttribute(
     'aria-checked',
     'true',
   );

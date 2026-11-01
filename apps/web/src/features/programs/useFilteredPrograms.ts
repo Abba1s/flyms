@@ -1,4 +1,3 @@
-import { isOpen } from '@flyms/shared';
 import { useMemo } from 'react';
 import { usePrograms } from './api';
 import {
@@ -6,6 +5,7 @@ import {
   buildSearchIndex,
   matchesStatus,
   sortPrograms,
+  STATUS_FILTERS,
   type Filters,
   type StatusFilter,
 } from './filters';
@@ -22,19 +22,15 @@ export function useFilteredPrograms(filters: Filters) {
   );
 
   const counts = useMemo(() => {
-    const c: Record<StatusFilter, number> = { open: 0, closing: 0, opening: 0, all: base.length };
-    for (const p of base) {
-      if (isOpen(p.status.status)) c.open++;
-      if (p.status.status === 'closing_soon') c.closing++;
-      if (p.status.status === 'opening_soon') c.opening++;
-    }
+    const c = Object.fromEntries(STATUS_FILTERS.map((f) => [f, 0])) as Record<StatusFilter, number>;
+    for (const p of base) for (const f of STATUS_FILTERS) if (matchesStatus(p.status, f)) c[f]++;
     return c;
   }, [base]);
 
   const results = useMemo(
     () =>
       sortPrograms(
-        base.filter((p) => matchesStatus(p.status.status, filters.status)),
+        base.filter((p) => matchesStatus(p.status, filters.status)),
         filters.sort,
         filters.dir,
       ),

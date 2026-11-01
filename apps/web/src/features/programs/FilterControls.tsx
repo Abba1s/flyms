@@ -7,9 +7,12 @@ import type { Filters, StatusFilter, TriState } from './filters';
 import { DEGREE_OPTIONS } from './labels';
 
 export const STATUS_OPTIONS: { value: StatusFilter; label: string }[] = [
-  { value: 'open', label: 'Open now' },
-  { value: 'closing', label: 'Closing soon' },
-  { value: 'opening', label: 'Opening soon' },
+  { value: 'open', label: 'Applications open' },
+  { value: 'closing3', label: 'Closing in 3 days' },
+  { value: 'closing7', label: 'Closing in 7 days' },
+  { value: 'closing', label: 'Closing in 15 days' },
+  { value: 'opening', label: 'Upcoming intake' },
+  { value: 'closed', label: 'Applications closed' },
   { value: 'all', label: 'All' },
 ];
 

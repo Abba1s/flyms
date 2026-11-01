@@ -12,9 +12,10 @@ import { useTheme } from '@/lib/theme';
 
 const TODAY = '2026-11-01';
 const statusSamples: Array<[string, IntakeDates]> = [
-  ['Closing soon', { start: '2026-10-01', end: '2026-11-07' }],
-  ['Open now', { start: '2026-10-01', end: '2027-01-15' }],
-  ['Opening soon', { start: '2026-12-01', end: '2027-03-01' }],
+  ['Closing in 3 days', { start: '2026-10-01', end: '2026-11-04' }],
+  ['Closing in 6 days', { start: '2026-10-01', end: '2026-11-07' }],
+  ['Applications open', { start: '2026-10-01', end: '2027-01-15' }],
+  ['Upcoming intake', { start: '2026-12-01', end: '2027-03-01' }],
   ['Closed', { start: '2026-05-01', end: '2026-07-15' }],
   ['Unknown', { start: null, end: null }],
 ];

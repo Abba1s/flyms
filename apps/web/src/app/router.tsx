@@ -77,6 +77,7 @@ const adminRoutes: RouteObject[] = [
       { path: 'universities', lazy: admin('UniversitiesAdminPage') },
       { path: 'taxonomy', lazy: admin('TaxonomyAdminPage') },
       { path: 'imports', lazy: admin('ImportsAdminPage') },
+      { path: 'deadlines', lazy: admin('DeadlinesAdminPage') },
       { path: 'imports/:batchId', lazy: admin('ImportBatchPage') },
       { path: 'queue/changes', lazy: admin('ChangesQueuePage') },
       { path: 'queue/reports', lazy: admin('ReportsQueuePage') },

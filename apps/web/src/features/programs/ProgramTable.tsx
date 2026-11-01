@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { StatusBadge } from '@/components/ui/StatusBadge';
+import { StatusBadge, UnverifiedBadge } from '@/components/ui/StatusBadge';
+import { showUnverified } from './ProgramCard';
 import { formatEuro } from '@/lib/format';
 import type { ProgramWithStatus } from './api';
 import { keyDateText } from './ProgramCard';
@@ -42,7 +43,10 @@ export function ProgramTable({ programs }: { programs: ProgramWithStatus[] }) {
           {programs.map((p) => (
             <tr key={p.id} className="border-t border-border hover:bg-surface-2/60">
               <td className="px-3 py-2.5">
-                <StatusBadge status={p.status} size="sm" />
+                <div className="flex flex-col items-start gap-1">
+                  <StatusBadge status={p.status} size="sm" />
+                  {showUnverified(p) && <UnverifiedBadge />}
+                </div>
               </td>
               <td className="px-3 py-2.5">
                 <Link

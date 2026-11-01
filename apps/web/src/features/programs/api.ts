@@ -14,7 +14,11 @@ import { z } from 'zod';
 import { supabase } from '@/lib/supabase';
 import { useToday } from '@/lib/useToday';
 
-export type ProgramWithStatus = PublicProgram & { status: ProgramStatus };
+export type ProgramWithStatus = PublicProgram & {
+  status: ProgramStatus;
+  /** Whether the intake that sets the headline status has a confirmed deadline. */
+  deadlineVerified: boolean;
+};
 
 export const queryKeys = {
   programs: ['programs'] as const,
@@ -48,7 +52,12 @@ export function usePrograms(asOf?: string) {
   const realToday = useToday();
   const today = asOf || realToday;
   const programs = useMemo<ProgramWithStatus[]>(
-    () => (query.data ?? []).map((p) => ({ ...p, status: getProgramStatus(p.intakes, today) })),
+    () =>
+      (query.data ?? []).map((p) => {
+        const status = getProgramStatus(p.intakes, today);
+        const intake = p.intakes[status.intakeIndex];
+        return { ...p, status, deadlineVerified: intake?.verified !== false };
+      }),
     [query.data, today],
   );
   return { ...query, programs, today };
@@ -124,6 +133,9 @@ const detailSchema = z.object({
       end: z.string().nullable(),
       eu_end: z.string().nullable(),
       note: z.string().nullable(),
+      verified: z.boolean().optional(),
+      verified_at: z.string().nullable().optional(),
+      verified_source: z.string().nullable().optional(),
     }),
   ),
   review_avg: z.coerce.number().nullable(),
