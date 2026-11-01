@@ -54,6 +54,7 @@ export interface AdminProgramRow {
   slug: string;
   name: string;
   state: 'draft' | 'published';
+  origin: 'manual' | 'daad';
   deleted_at: string | null;
   last_verified_at: string | null;
   updated_at: string;
@@ -74,7 +75,7 @@ export function useAdminPrograms() {
           await supabase
             .from('programs')
             .select(
-              'id, slug, name, state, deleted_at, last_verified_at, updated_at, field_id, university_id, universities(name, slug), fields(name, slug)',
+              'id, slug, name, state, origin, deleted_at, last_verified_at, updated_at, field_id, university_id, universities(name, slug), fields(name, slug)',
             )
             .order('updated_at', { ascending: false })
             .order('id')

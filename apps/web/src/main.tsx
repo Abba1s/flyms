@@ -41,6 +41,8 @@ createRoot(document.getElementById('root')!).render(
       persistOptions={{
         persister,
         maxAge: ONE_WEEK,
+        // Bump when the shape or size of the dataset changes so browsers drop their saved copy.
+        buster: 'daad-import-2026-11',
         dehydrateOptions: {
           shouldDehydrateQuery: (q) =>
             q.state.status === 'success' && PERSISTED_KEYS.has(String(q.queryKey[0])),

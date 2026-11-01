@@ -2,10 +2,13 @@ import { daysBetween } from '@flyms/shared';
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Badge } from '@/components/ui/Badge';
+import { Pagination } from '@/components/ui/Pagination';
 import { useAdminPrograms } from '@/features/admin/api';
 import { STALE_AFTER_DAYS } from '@/features/programs/labels';
 import { formatDate } from '@/lib/format';
 import { useToday } from '@/lib/useToday';
+
+const PAGE_SIZES = [25, 50, 100];
 
 export function ProgramsAdminPage() {
   const { data: programs = [], isPending } = useAdminPrograms();
@@ -15,6 +18,9 @@ export function ProgramsAdminPage() {
   const state = params.get('state') ?? 'all';
   const staleOnly = params.get('stale') === '1';
   const showDeleted = params.get('deleted') === '1';
+  const origin = params.get('origin') ?? 'all';
+  const size = PAGE_SIZES.includes(Number(params.get('size'))) ? Number(params.get('size')) : 50;
+  const requestedPage = Math.max(1, Number(params.get('page')) || 1);
 
   const isStale = (d: string | null) => !d || daysBetween(d, today) > STALE_AFTER_DAYS;
   const rows = useMemo(() => {
@@ -23,19 +29,30 @@ export function ProgramsAdminPage() {
       (p) =>
         (showDeleted ? p.deleted_at !== null : p.deleted_at === null) &&
         (state === 'all' || p.state === state) &&
+        (origin === 'all' || p.origin === origin) &&
         (!staleOnly || isStale(p.last_verified_at)) &&
         (!needle ||
           `${p.name} ${p.universities?.name ?? ''} ${p.slug}`.toLowerCase().includes(needle)),
     );
     // isStale depends only on today
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [programs, q, state, staleOnly, showDeleted, today]);
+  }, [programs, q, state, origin, staleOnly, showDeleted, today]);
 
+  const pageCount = Math.max(1, Math.ceil(rows.length / size));
+  const page = Math.min(requestedPage, pageCount);
+  const pageRows = rows.slice((page - 1) * size, page * size);
+
+  /** Any filter change starts again from page 1. */
   const setParam = (key: string, value: string | null) => {
     const next = new URLSearchParams(params);
     if (value === null) next.delete(key);
     else next.set(key, value);
-    setParams(next, { replace: true });
+    if (key !== 'page') next.delete('page');
+    setParams(next, { replace: key !== 'page' });
+  };
+  const goToPage = (n: number) => {
+    setParam('page', n === 1 ? null : String(n));
+    window.scrollTo({ top: 0 });
   };
 
   return (
@@ -54,7 +71,10 @@ export function ProgramsAdminPage() {
         <input
           type="search"
           value={q}
-          onChange={(e) => setQ(e.target.value)}
+          onChange={(e) => {
+            setQ(e.target.value);
+            if (params.has('page')) setParam('page', null);
+          }}
           placeholder="Search name, university, slug"
           aria-label="Search programs"
           className="h-10 w-72 rounded-md border border-border bg-surface px-3 text-sm"
@@ -68,6 +88,16 @@ export function ProgramsAdminPage() {
           <option value="all">All states</option>
           <option value="published">Published</option>
           <option value="draft">Draft</option>
+        </select>
+        <select
+          aria-label="Source"
+          value={origin}
+          onChange={(e) => setParam('origin', e.target.value === 'all' ? null : e.target.value)}
+          className="h-10 rounded-md border border-border bg-surface px-3 text-sm"
+        >
+          <option value="all">All sources</option>
+          <option value="manual">Added by you</option>
+          <option value="daad">Imported from DAAD</option>
         </select>
         <label className="flex items-center gap-2 text-sm">
           <input
@@ -85,7 +115,23 @@ export function ProgramsAdminPage() {
           />
           Show deleted
         </label>
-        <span className="text-sm text-muted">{rows.length} shown</span>
+        <span className="text-sm tabular-nums text-muted">
+          {rows.length === 0
+            ? 'No matches'
+            : `${(page - 1) * size + 1}–${Math.min(page * size, rows.length)} of ${rows.length}`}
+        </span>
+        <select
+          aria-label="Rows per page"
+          value={size}
+          onChange={(e) => setParam('size', e.target.value === '50' ? null : e.target.value)}
+          className="h-10 rounded-md border border-border bg-surface px-3 text-sm"
+        >
+          {PAGE_SIZES.map((n) => (
+            <option key={n} value={n}>
+              {n} per page
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-border bg-surface">
@@ -107,7 +153,7 @@ export function ProgramsAdminPage() {
                 </td>
               </tr>
             )}
-            {rows.map((p) => (
+            {pageRows.map((p) => (
               <tr key={p.id} className="border-t border-border hover:bg-surface-2/60">
                 <td className="px-3 py-2">
                   <Link
@@ -116,7 +162,10 @@ export function ProgramsAdminPage() {
                   >
                     {p.name}
                   </Link>
-                  <div className="text-xs text-muted">{p.universities?.name}</div>
+                  <div className="text-xs text-muted">
+                    {p.universities?.name}
+                    {p.origin === 'daad' && ' · from DAAD'}
+                  </div>
                 </td>
                 <td className="px-3 py-2">{p.fields?.name}</td>
                 <td className="px-3 py-2">
@@ -137,6 +186,7 @@ export function ProgramsAdminPage() {
           </tbody>
         </table>
       </div>
+      <Pagination page={page} pageCount={pageCount} onChange={goToPage} />
     </div>
   );
 }

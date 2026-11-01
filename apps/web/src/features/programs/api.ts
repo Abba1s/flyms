@@ -58,7 +58,13 @@ async function fetchSpecializations(): Promise<Specialization[]> {
 /** All published programs with today's admission status attached. */
 /** All programs, with admission status for today (or for `asOf`, an ISO date). */
 export function usePrograms(asOf?: string) {
-  const query = useQuery({ queryKey: queryKeys.programs, queryFn: fetchPrograms });
+  // The list changes with every sync (twice a day, or when an admin presses Sync now), so
+  // a saved copy is shown instantly but refreshed after a few minutes.
+  const query = useQuery({
+    queryKey: queryKeys.programs,
+    queryFn: fetchPrograms,
+    staleTime: 5 * 60 * 1000,
+  });
   const realToday = useToday();
   const today = asOf || realToday;
   const programs = useMemo<ProgramWithStatus[]>(

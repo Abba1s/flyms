@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
 import { useToast } from '@/components/ui/Toast';
 import { adminKeys, errorMessage, useAdminRpc } from '@/features/admin/api';
+import { queryKeys } from '@/features/programs/api';
 import { formatDate } from '@/lib/format';
 import { supabase } from '@/lib/supabase';
 
@@ -149,6 +150,7 @@ export function DeadlinesAdminPage() {
     } finally {
       setRunning(false);
       void client.invalidateQueries({ queryKey: adminKeys.all });
+      void client.invalidateQueries({ queryKey: queryKeys.programs });
     }
   };
 
