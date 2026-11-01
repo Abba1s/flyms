@@ -10,6 +10,8 @@ export const intakeSchema = z.object({
   year: z.string(),
   start: isoDate.nullable(),
   end: isoDate.nullable(),
+  /** False when no official source or admin confirmed this deadline recently. */
+  verified: z.boolean().optional(),
 });
 export type Intake = z.infer<typeof intakeSchema>;
 

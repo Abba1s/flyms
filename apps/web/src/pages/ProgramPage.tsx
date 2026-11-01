@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ExternalIcon, FlagIcon } from '@/components/icons';
 import { Badge } from '@/components/ui/Badge';
 import { EmptyState } from '@/components/ui/EmptyState';
-import { StatusBadge } from '@/components/ui/StatusBadge';
+import { StatusBadge, UnverifiedBadge } from '@/components/ui/StatusBadge';
 import { trackProgramView, useFieldMap, useProgramDetail } from '@/features/programs/api';
 import {
   LANGUAGE_LABEL,
@@ -99,7 +99,12 @@ export function ProgramPage() {
         className="flex flex-col gap-4 rounded-lg border border-border border-l-4 bg-surface p-5"
         style={{ borderLeftColor: field?.color }}
       >
-        <StatusBadge status={status} className="self-start" />
+        <div className="flex flex-wrap items-center gap-2 self-start">
+          <StatusBadge status={status} />
+          {p.intakes[status.intakeIndex]?.verified === false && status.status !== 'unknown' && (
+            <UnverifiedBadge />
+          )}
+        </div>
         <div>
           <h1 className="text-2xl font-bold tracking-tight md:text-3xl">{p.name}</h1>
           <p className="mt-1 text-muted">
@@ -179,12 +184,16 @@ export function ProgramPage() {
                     {i.eu_end && ` · EU applicants: ${formatDate(i.eu_end)}`}
                   </p>
                   {i.note && <p className="text-sm text-muted">{i.note}</p>}
+                  {i.verified && i.verified_source === 'daad' && i.verified_at && (
+                    <p className="text-xs text-muted">
+                      Deadline confirmed with DAAD on {formatDate(i.verified_at.slice(0, 10))}
+                    </p>
+                  )}
                 </div>
-                <StatusBadge
-                  status={getIntakeStatus(i, today)}
-                  size="sm"
-                  className="self-start sm:self-center"
-                />
+                <div className="flex flex-wrap items-center gap-1.5 self-start sm:justify-end sm:self-center">
+                  <StatusBadge status={getIntakeStatus(i, today)} size="sm" />
+                  {i.verified === false && i.end && <UnverifiedBadge />}
+                </div>
               </li>
             ))}
           </ul>

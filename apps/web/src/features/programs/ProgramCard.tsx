@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/Badge';
-import { StatusBadge } from '@/components/ui/StatusBadge';
+import { StatusBadge, UnverifiedBadge } from '@/components/ui/StatusBadge';
 import { formatDate } from '@/lib/format';
 import type { ProgramWithStatus } from './api';
 import { LANGUAGE_LABEL, intakeLabel } from './labels';
@@ -13,6 +13,11 @@ interface ProgramCardProps {
 }
 
 /** The deadline or opening date that the status refers to. */
+/** Only worth saying when there is a deadline to doubt. */
+export function showUnverified(p: ProgramWithStatus): boolean {
+  return !p.deadlineVerified && p.status.status !== 'unknown';
+}
+
 export function keyDateText(p: ProgramWithStatus): string | null {
   const intake = p.intakes[p.status.intakeIndex];
   if (!intake) return null;
@@ -45,7 +50,10 @@ export function ProgramCard({ program: p, fieldColor }: ProgramCardProps) {
       style={{ borderLeftColor: fieldColor }}
     >
       <div className="flex items-start justify-between gap-2">
-        <StatusBadge status={p.status} size="sm" />
+        <div className="flex flex-wrap items-center gap-1.5">
+          <StatusBadge status={p.status} size="sm" />
+          {showUnverified(p) && <UnverifiedBadge />}
+        </div>
         <SaveButton programId={p.id} programName={p.name} className="-mr-2 -mt-2" />
       </div>
       <div className="flex flex-col gap-1">

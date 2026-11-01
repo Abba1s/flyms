@@ -118,7 +118,7 @@ export function HomePage() {
         <section aria-labelledby="closing-heading" className="flex flex-col gap-4">
           <div className="flex items-end justify-between gap-3">
             <h2 id="closing-heading" className="text-xl font-semibold">
-              Closing soon
+              Closing in the next 15 days
             </h2>
             <Link
               to="/explore?status=closing"

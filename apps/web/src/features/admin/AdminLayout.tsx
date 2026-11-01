@@ -10,6 +10,7 @@ const NAV = [
   { to: '/admin/universities', label: 'Universities' },
   { to: '/admin/taxonomy', label: 'Fields' },
   { to: '/admin/imports', label: 'Imports' },
+  { to: '/admin/deadlines', label: 'Deadline sync', count: 'deadlines' as const },
   { to: '/admin/queue/changes', label: 'Change requests', count: 'changes' as const },
   { to: '/admin/queue/reports', label: 'Reports', count: 'reports' as const },
   { to: '/admin/queue/questions', label: 'Questions', count: 'questions' as const },

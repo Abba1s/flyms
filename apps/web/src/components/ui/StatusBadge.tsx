@@ -1,6 +1,6 @@
-import type { AdmissionStatus, IntakeStatus } from '@flyms/shared';
+import { closingBucket, type AdmissionStatus, type IntakeStatus } from '@flyms/shared';
 import { cn } from '@/lib/cn';
-import { STATUS_LABEL, countdownText } from '@/lib/format';
+import { countdownText, statusLabel } from '@/lib/format';
 
 const tone: Record<AdmissionStatus, string> = {
   closing_soon: 'bg-st-closing/12 text-st-closing',
@@ -55,20 +55,47 @@ export interface StatusBadgeProps {
 
 /** Status is always conveyed by icon + text, never colour alone. */
 export function StatusBadge({ status, size = 'md', className }: StatusBadgeProps) {
-  const label = STATUS_LABEL[status.status];
+  const label = statusLabel(status);
   const countdown = countdownText(status);
+  // The last 3 days get a solid fill so they stand out from the 7- and 15-day buckets.
+  const urgent = status.status === 'closing_soon' && closingBucket(status.daysLeft) === 3;
   return (
     <span
       className={cn(
         'inline-flex flex-wrap items-center gap-x-1.5 rounded-sm font-semibold tabular-nums',
         size === 'sm' ? 'px-1.5 py-0.5 text-xs' : 'px-2 py-1 text-xs',
-        tone[status.status],
+        urgent ? 'bg-st-closing text-white' : tone[status.status],
         className,
       )}
     >
       <StatusIcon status={status.status} />
       <span className="whitespace-nowrap">{label}</span>
       {countdown && <span className="whitespace-nowrap font-medium">· {countdown}</span>}
+    </span>
+  );
+}
+
+/** Shown next to a status when no source or admin has confirmed the deadline recently. */
+export function UnverifiedBadge({ className }: { className?: string }) {
+  return (
+    <span
+      title="We could not confirm this deadline with an official source recently. Check the university's website before applying."
+      className={cn(
+        'inline-flex items-center gap-1 rounded-sm border border-dashed border-st-unknown px-1.5 py-0.5 text-xs font-medium text-muted',
+        className,
+      )}
+    >
+      <svg
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        className="h-3 w-3 shrink-0"
+        aria-hidden
+      >
+        <path d="M8 2 1.5 13.5h13L8 2ZM8 6.5v3M8 11.5v.01" />
+      </svg>
+      Deadline not verified
     </span>
   );
 }

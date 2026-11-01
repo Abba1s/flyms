@@ -2,6 +2,7 @@ export { AdminLayout } from '@/features/admin/AdminLayout';
 export { AdminLoginPage } from './AdminLoginPage';
 export { ChangesQueuePage } from './ChangesQueuePage';
 export { DashboardPage } from './DashboardPage';
+export { DeadlinesAdminPage } from './DeadlinesAdminPage';
 export { ImportBatchPage } from './ImportBatchPage';
 export { ImportsAdminPage } from './ImportsAdminPage';
 export { ProgramEditorPage } from './ProgramEditorPage';

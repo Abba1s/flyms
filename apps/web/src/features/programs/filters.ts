@@ -1,8 +1,19 @@
-import { isOpen, type AdmissionStatus } from '@flyms/shared';
+import { closingBucket, isOpen, type IntakeStatus } from '@flyms/shared';
 import MiniSearch from 'minisearch';
 import type { ProgramWithStatus } from './api';
 
-export type StatusFilter = 'open' | 'closing' | 'opening' | 'all';
+/** `closing` is the 15-day bucket; `closing3`/`closing7` are its narrower slices. */
+export type StatusFilter =
+  'open' | 'closing3' | 'closing7' | 'closing' | 'opening' | 'closed' | 'all';
+export const STATUS_FILTERS: readonly StatusFilter[] = [
+  'open',
+  'closing3',
+  'closing7',
+  'closing',
+  'opening',
+  'closed',
+  'all',
+];
 export type SortKey = 'deadline' | 'qs' | 'tuition' | 'name';
 export type TriState = 'yes' | 'no' | 'any';
 
@@ -75,11 +86,7 @@ export function parseFilters(
     q: params.get('q') ?? defaults.q,
     fields: params.has('field') ? list(params.get('field')) : defaults.fields,
     specs: params.has('spec') ? list(params.get('spec')) : defaults.specs,
-    status: oneOf(
-      params.get('status'),
-      ['open', 'closing', 'opening', 'all'] as const,
-      defaults.status,
-    ),
+    status: oneOf(params.get('status'), STATUS_FILTERS, defaults.status),
     intake: oneOf(params.get('intake'), ['winter', 'summer', 'any'] as const, defaults.intake),
     lang: oneOf(params.get('lang'), ['english', 'german', 'any'] as const, defaults.lang),
     degrees: params.has('degree') ? list(params.get('degree')) : defaults.degrees,
@@ -150,14 +157,22 @@ export function countActiveFilters(f: Filters, defaults: Filters = DEFAULT_FILTE
   return keys.filter((k) => JSON.stringify(f[k]) !== JSON.stringify(defaults[k])).length;
 }
 
-export function matchesStatus(status: AdmissionStatus, filter: StatusFilter): boolean {
+export function matchesStatus(s: IntakeStatus, filter: StatusFilter): boolean {
+  const bucket = s.status === 'closing_soon' ? closingBucket(s.daysLeft) : null;
   switch (filter) {
     case 'open':
-      return isOpen(status);
+      return isOpen(s.status);
+    case 'closing3':
+      return bucket === 3;
+    case 'closing7':
+      return bucket === 3 || bucket === 7;
     case 'closing':
-      return status === 'closing_soon';
+      return bucket !== null;
     case 'opening':
-      return status === 'opening_soon';
+      // Upcoming intake: closed now, with a known future start date.
+      return s.status === 'opening_soon' || (s.status === 'closed' && s.daysUntilOpen !== null);
+    case 'closed':
+      return s.status === 'closed' && s.daysUntilOpen === null;
     case 'all':
       return true;
   }
@@ -217,9 +232,7 @@ export function applyFilters(
   f: Filters,
   index?: MiniSearch<ProgramWithStatus>,
 ): ProgramWithStatus[] {
-  return applyNonStatusFilters(programs, f, index).filter((p) =>
-    matchesStatus(p.status.status, f.status),
-  );
+  return applyNonStatusFilters(programs, f, index).filter((p) => matchesStatus(p.status, f.status));
 }
 
 /** Days until the next relevant date; programs without one sort last. */

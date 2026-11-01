@@ -54,9 +54,9 @@ function useIsDesktop() {
 }
 
 const LEGEND = [
-  ['closing_soon', 'Closing soon (≤ 14 days)'],
-  ['open', 'Open now'],
-  ['opening_soon', 'Opening soon (≤ 60 days)'],
+  ['closing_soon', 'Closing soon (≤ 15 days)'],
+  ['open', 'Applications open'],
+  ['opening_soon', 'Upcoming intake (opens ≤ 60 days)'],
   ['closed', 'Closed'],
 ] as const;
 

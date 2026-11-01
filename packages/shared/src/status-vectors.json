@@ -39,6 +39,13 @@
     "today": "2026-12-31",
     "start": "2026-10-01",
     "end": "2027-01-15",
+    "status": "closing_soon"
+  },
+  {
+    "name": "16 days left",
+    "today": "2026-12-30",
+    "start": "2026-10-01",
+    "end": "2027-01-15",
     "status": "open"
   },
   {
@@ -83,7 +90,13 @@
     "end": null,
     "status": "unknown"
   },
-  { "name": "no dates", "today": "2026-11-01", "start": null, "end": null, "status": "unknown" },
+  {
+    "name": "no dates",
+    "today": "2026-11-01",
+    "start": null,
+    "end": null,
+    "status": "unknown"
+  },
   {
     "name": "leap day deadline open",
     "today": "2028-02-29",

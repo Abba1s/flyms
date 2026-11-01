@@ -7,7 +7,7 @@
  * supabase/migrations mirrors these rules; `status-vectors.json` keeps both in sync.
  */
 
-export const CLOSING_SOON_DAYS = 14;
+export const CLOSING_SOON_DAYS = 15;
 export const OPENING_SOON_DAYS = 60;
 export const ADMISSION_TIME_ZONE = 'Europe/Berlin';
 

@@ -5,6 +5,7 @@ import {
   applyFilters,
   buildSearchIndex,
   countActiveFilters,
+  matchesStatus,
   parseFilters,
   serializeFilters,
   sortPrograms,
@@ -47,7 +48,7 @@ function program(
     intakes: [],
     ...overrides,
   };
-  return { ...base, status: getProgramStatus(base.intakes, TODAY) };
+  return { ...base, status: getProgramStatus(base.intakes, TODAY), deadlineVerified: true };
 }
 
 const ai = program({
@@ -124,6 +125,25 @@ describe('URL round-trip', () => {
     expect(parseFilters(new URLSearchParams(''), mapDefaults).status).toBe('open');
     expect(serializeFilters(mapDefaults, mapDefaults).toString()).toBe('');
     expect(serializeFilters(DEFAULT_FILTERS, mapDefaults).get('status')).toBe('all');
+  });
+});
+
+describe('matchesStatus buckets', () => {
+  const closing = (daysLeft: number) =>
+    ({ status: 'closing_soon', daysLeft, daysUntilOpen: null, startStated: true }) as const;
+  it('nests the 3, 7 and 15-day buckets', () => {
+    expect(matchesStatus(closing(2), 'closing3')).toBe(true);
+    expect(matchesStatus(closing(2), 'closing7')).toBe(true);
+    expect(matchesStatus(closing(5), 'closing3')).toBe(false);
+    expect(matchesStatus(closing(5), 'closing7')).toBe(true);
+    expect(matchesStatus(closing(15), 'closing7')).toBe(false);
+    expect(matchesStatus(closing(15), 'closing')).toBe(true);
+  });
+  it('splits closed into upcoming and closed', () => {
+    const base = { status: 'closed', daysLeft: null, startStated: true } as const;
+    expect(matchesStatus({ ...base, daysUntilOpen: 120 }, 'opening')).toBe(true);
+    expect(matchesStatus({ ...base, daysUntilOpen: 120 }, 'closed')).toBe(false);
+    expect(matchesStatus({ ...base, daysUntilOpen: null }, 'closed')).toBe(true);
   });
 });
 

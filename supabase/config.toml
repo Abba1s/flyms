@@ -431,3 +431,7 @@ verify_jwt = false
 # Authorised inside the function (admin JWT or x-cron-secret).
 [functions.link-checker]
 verify_jwt = false
+
+# Authorised inside the function (admin JWT or x-cron-secret). Runs every 12 hours via pg_cron.
+[functions.deadline-sync]
+verify_jwt = false

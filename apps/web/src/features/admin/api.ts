@@ -161,7 +161,7 @@ export function useQueueCounts() {
   return useQuery({
     queryKey: adminKeys.queueCounts,
     queryFn: async () => {
-      const [changes, reports, questions, reviews] = await Promise.all([
+      const [changes, reports, questions, reviews, deadlines] = await Promise.all([
         supabase
           .from('change_requests')
           .select('id', { count: 'exact', head: true })
@@ -179,12 +179,18 @@ export function useQueueCounts() {
           .from('reviews')
           .select('id', { count: 'exact', head: true })
           .eq('status', 'pending'),
+        supabase
+          .from('deadline_changes')
+          .select('id', { count: 'exact', head: true })
+          .eq('action', 'flagged')
+          .is('resolved_at', null),
       ]);
       return {
         changes: changes.count ?? 0,
         reports: reports.count ?? 0,
         questions: questions.count ?? 0,
         reviews: reviews.count ?? 0,
+        deadlines: deadlines.count ?? 0,
       };
     },
   });

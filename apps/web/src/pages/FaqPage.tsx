@@ -4,12 +4,12 @@ const FAQ: { q: string; a: string }[] = [
     a: "Master's programs at German universities in every field. Each program shows its application windows, key requirements and costs, with a link to the official page.",
   },
   {
-    q: 'What do "Open now", "Closing soon" and "Opening soon" mean?',
-    a: 'Open now: today is inside the application window. Closing soon: open, with 14 days or fewer left. Opening soon: the window opens within the next 60 days. Dates are calculated in German time, and a deadline counts as open until the end of that day.',
+    q: 'What do the application status labels mean?',
+    a: 'Applications open: today is inside the application window. Closing in 3, 7 or 15 days: open, and the deadline is that close. Upcoming intake: applications are closed now but a future opening date is known. Applications closed: the window has passed and no new dates are published yet. Dates are calculated in German time, and a deadline counts as open until the end of that day.',
   },
   {
     q: 'How accurate are the dates?',
-    a: 'Each program shows when its details were last verified. Universities change deadlines every year, so always confirm on the official page before you apply. If something is wrong, please report it.',
+    a: 'Twice a day we check deadlines against the DAAD international programmes database. A matching deadline is marked as confirmed, and if DAAD shows a changed date we update it. When a deadline cannot be confirmed with an official source, the program shows "Deadline not verified" until our team checks it by hand. Universities change deadlines every year, so always confirm on the official page before you apply. If something is wrong, please report it.',
   },
   {
     q: 'Do I need an account?',
